@@ -1,32 +1,54 @@
-
 import { useState, useEffect } from 'react';
 import React from 'react';
-import { Col, Card,Row ,Container,Button} from 'react-bootstrap';
+import { Col, Card, Row, Container, Button } from 'react-bootstrap';
 
-const InfoCard = ({ value,characterInfo,vehiclesNames,toggleShown }) => {
+const InfoCard = ({ value, characterInfo, vehiclesNames, toggleShown }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [badRequest, setBadRequest] = useState(false);
-  const [starShip, setStarShip] = useState(false);
-  const handleFetch =  (value)=>{
-    console.log(value)
-    // try {
-    //   setIsLoading(true);
-    //   // const response = await Promise.all(
-    //   //   value1.starships.map((value) => fetch(value).then((res) => res.json()))
-    //   // );
+  const [starShip, setStarShip] = useState([]);
+  const [vehicles, setVehicles] = useState([]);
+  const handleFetch = async (value) => {
+    try {
+      setIsLoading(true);
+      const starShipResponse = await Promise.all(
+        value.starships.map((value) => fetch(value).then((res) => res.json()))
+      );
+      
      
-    //   // if (response.length >= 0) {
-    //   //   setStarShip(response);
-    //   // } else {
-    //   //   setBadRequest(true);
-    //   // }
-    // } catch {
-    //   setHasError(true);
-    // } finally {
-    //   setIsLoading(false);
-    // }
-  }
+      if(starShipResponse.length >= 0){
+        setStarShip(starShipResponse);
+
+      }
+
+      // setVehicles(setVehiclesResponse)
+    } catch {
+      setHasError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const handleVehiclesFetch = async (value) => {
+    try {
+      setIsLoading(true);
+
+      const setVehiclesResponse = await Promise.all(
+        value.vehicles.map((value) => fetch(value).then((res) => res.json()))
+      );
+     
+      if(setVehiclesResponse >= 0){
+        setVehicles(setVehiclesResponse);
+
+      }
+      
+    } catch {
+      setHasError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  console.log(starShip);
+  console.log(vehicles);
   return (
     <div>
       <Col md={12} sm={12} lg={12}>
@@ -42,32 +64,48 @@ const InfoCard = ({ value,characterInfo,vehiclesNames,toggleShown }) => {
             <Card.Subtitle className='mb-2 text-success'>
               <p>{`Release_date : ${value.release_date}`}</p>
             </Card.Subtitle>
-            <Card.Text className='mb-2 text-dark '>
+            <Card.Text className='mb-2 text-info '>
               {` Opening story : ${value.opening_crawl}`}
             </Card.Text>
             <Container>
-            <Row >
-            { characterInfo.map(value=>{
-              return(
-                
-               
-               <>
-    <Col xs={6} md={3} lg ={4}>
-    <h6 className='mb-2 text-danger'>{` Character : ${value.name}`}</h6>
-    <Button key={value.name} className='m-2 text-dark' onClick={()=> {handleFetch(value) ;toggleShown(value.name)}}>Display vehicles </Button>
-    {/* <Button className='m-2 text-dark' onClick={value && handleFetch()}>Display species</Button> */}
-    </Col>
-    
-     
-    
-    </>
-   
-  
-              
-              )
-            })}
-            </Row>
-              </Container>
+              <Row>
+                {characterInfo.map((value) => {
+                  return (
+                    <>
+                      <Col xs={6} md={4} lg={4}>
+                        <h6 className='m-2 text-danger'>{` Name: ${value.name}`}</h6>
+                        <Button
+                          key={value.name}
+                          className='m-1 text-dark'
+                          variant='outline-info'
+                          size='sm'
+                          onClick={() => {
+                            handleVehiclesFetch(value);
+                            toggleShown(value.name);
+                          }}
+                        >
+                          {' '}
+                          vehicles{' '}{vehicles.length > 0 && vehicles.map((vehicle)=> console.log(vehicle.name))}
+                        </Button>
+                       {/*  */}
+                        <Button
+                          variant='outline-success'
+                          className='m=1 text-dark'
+                          size='sm'
+                          onClick={() => {
+                            handleFetch(value);
+                            toggleShown(value.name);
+                          }}
+                        >
+                          {' '}
+                          starShip
+                        </Button>
+                      </Col>
+                    </>
+                  );
+                })}
+              </Row>
+            </Container>
           </Card.Body>
         </Card>
       </Col>

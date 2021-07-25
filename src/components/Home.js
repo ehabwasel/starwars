@@ -7,9 +7,7 @@ import InfoCard from './InfoCard';
 const Home = () => {
   const [info, setInfo] = useState([]);
   const [characterInfo, setCharacterInfo] = useState([]);
-  const [species, setSpecies] = useState([]);
-  const [characterVehicles, setCharacterVehicles] = useState([]);
-  const [vehiclesNames, setVehiclesNames] = useState([]);
+ 
   const toggleShown = (title) => {
     const shownState = info.slice();
     const index = shownState.indexOf(title);
@@ -29,9 +27,8 @@ const Home = () => {
     data,
     setIsLoading,
     setHasError,
-    setBadRequest,
+    
   } = useFetch(url);
- 
   const fetchCharactersData = async (value) => {
     try {
       setIsLoading(true);
@@ -40,24 +37,14 @@ const Home = () => {
         
       );
       setCharacterInfo(response);
-      
-      
       const characterData = characterInfo.map((value) => value.species);
-      const vehicles = characterInfo.map((value) => value.vehicles);
-      setSpecies(species);
-      setCharacterVehicles(vehicles);
-        // console.log(vehicles);
-        // console.log(characterData);
-      
-     
     } catch {
       setHasError(true);
     } finally {
       setIsLoading(false);
     }
   };
-  // console.log(vehiclesNames)
-  
+
   return (
     <Container className='mt-5'>
       <Row>
@@ -86,8 +73,8 @@ const Home = () => {
                   </Button>
                 </Col>
 
-                {info.includes(value.title) && (
-                  <InfoCard value={value} characterInfo={characterInfo} vehiclesNames={vehiclesNames} toggleShown={toggleShown} />
+                {info.includes(value.title) && characterInfo.length >= 0 && (
+                  <InfoCard value={value} characterInfo={characterInfo} toggleShown={toggleShown} />
                 )}
               </>
             );
