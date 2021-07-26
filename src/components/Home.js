@@ -25,25 +25,12 @@ const Home = () => {
     badRequest,
     hasError,
     data,
-    setIsLoading,
-    setHasError,
+    fetchApiArrayData,apiArrayData
     
   } = useFetch(url);
-  const fetchCharactersData = async (value) => {
-    try {
-      setIsLoading(true);
-      const response = await Promise.all(
-        value.characters.map((value) => fetch(value).then((res) => res.json()))
-        
-      );
-      setCharacterInfo(response);
-      const characterData = characterInfo.map((value) => value.species);
-    } catch {
-      setHasError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
+
+  
 
   return (
     <Container className='mt-5'>
@@ -65,7 +52,7 @@ const Home = () => {
                   <Button
                     onClick={() => {
                       toggleShown(value.title);
-                      fetchCharactersData(value);
+                      fetchApiArrayData(value);
                     }}
                   >
                     {' '}
@@ -73,8 +60,8 @@ const Home = () => {
                   </Button>
                 </Col>
 
-                {info.includes(value.title) && characterInfo.length >= 0 && (
-                  <InfoCard value={value} characterInfo={characterInfo} toggleShown={toggleShown} />
+                {info.includes(value.title) && apiArrayData.length >= 0 && (
+                  <InfoCard value={value} apiArrayData={apiArrayData} toggleShown={toggleShown} />
                 )}
               </>
             );

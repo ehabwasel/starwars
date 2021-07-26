@@ -7,6 +7,8 @@ const useFetch = (url) => {
   const [badRequest, setBadRequest] = useState(false);
   const [data, setData] = useState();
   
+  const [apiArrayData, setApiArrayData] = useState([]);
+  
 
   const fetchData = async () => {
     try {
@@ -28,16 +30,30 @@ const useFetch = (url) => {
   
   };
 
+  const fetchApiArrayData = async (value) => {
+    try {
+      setIsLoading(true);
+      const response = await Promise.all(
+        value.characters.map((value) => fetch(value).then((res) => res.json()))
+        
+      );
+      if(response.length >= 0){
 
+        setApiArrayData(response);
+      }
+      
+    } catch {
+      setHasError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
     fetchData();
   }, [url]);
-  // useEffect(() => {
-  //   fetchCharactersData()
-  //   ;
-  // }, []);
 
-  return { isLoading, badRequest, hasError, data ,setIsLoading,setHasError,setBadRequest};
+
+  return { isLoading, badRequest, hasError, data ,fetchApiArrayData,apiArrayData};
 };
 
 

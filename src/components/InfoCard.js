@@ -1,57 +1,17 @@
-import { useState, useEffect } from 'react';
+
 import React from 'react';
 import CharInfo from './CharInfo'
 import { Col, Card, Row, Container, Button } from 'react-bootstrap';
 
-const InfoCard = ({ value, characterInfo, vehiclesNames, toggleShown }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [badRequest, setBadRequest] = useState(false);
-  const [starShip, setStarShip] = useState([]);
-  const [vehicles, setVehicles] = useState([]);
-  const handleFetch = async (value) => {
-    try {
-      setIsLoading(true);
-      const starShipResponse = await Promise.all(
-        value.starships.map((value) => fetch(value).then((res) => res.json()))
-      );
-
-      if (starShipResponse.length >= 0) {
-        setStarShip(starShipResponse);
-      }
-
-      // setVehicles(setVehiclesResponse)
-    } catch {
-      setHasError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  const handleVehiclesFetch = async (value) => {
-    try {
-      setIsLoading(true);
-
-      const setVehiclesResponse = await Promise.all(
-        value.vehicles.map((value) => fetch(value).then((res) => res.json()))
-      );
-
-      if (setVehiclesResponse >= 0) {
-        setVehicles(setVehiclesResponse);
-      }
-    } catch {
-      setHasError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  console.log(vehicles);
+const InfoCard = ({ value, apiArrayData}) => {
+  
+ 
   return (
     <div>
       <Col md={12} sm={12} lg={12}>
-        <Card border='dark' bg='light' text={'dark'} className='mb-4'>
+        <Card border='dark' bg='dark' text={'dark'} className='mb-4'>
           <Card.Body>
-            <Card.Header className='mb-2 text-dark p-3 '>
+            <Card.Header className='mb-2 text-light p-3 '>
               <h3>{`Title of the movie : ${value.title}`}</h3>
             </Card.Header>
 
@@ -65,14 +25,19 @@ const InfoCard = ({ value, characterInfo, vehiclesNames, toggleShown }) => {
               {` Opening story : ${value.opening_crawl}`}
             </Card.Text>
             
-                {characterInfo.map((value) => {
-                  return (
-                    <>
-                      <CharInfo value={value} />
-                      
-                    </>
-                  );
-                })}
+            <Row>
+              {apiArrayData.map((value) => {
+                return (
+                  
+                  <Col xs="6" md={4} lg ={4} thumbnail>
+                    
+                    <CharInfo value={value} />
+                    
+                  </Col>
+                 
+                );
+              })}
+            </Row>
             
           </Card.Body>
         </Card>
