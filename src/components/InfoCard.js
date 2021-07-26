@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
+import CharInfo from './CharInfo'
 import { Col, Card, Row, Container, Button } from 'react-bootstrap';
 
 const InfoCard = ({ value, characterInfo, vehiclesNames, toggleShown }) => {
@@ -14,11 +15,9 @@ const InfoCard = ({ value, characterInfo, vehiclesNames, toggleShown }) => {
       const starShipResponse = await Promise.all(
         value.starships.map((value) => fetch(value).then((res) => res.json()))
       );
-      
-     
-      if(starShipResponse.length >= 0){
-        setStarShip(starShipResponse);
 
+      if (starShipResponse.length >= 0) {
+        setStarShip(starShipResponse);
       }
 
       // setVehicles(setVehiclesResponse)
@@ -35,19 +34,17 @@ const InfoCard = ({ value, characterInfo, vehiclesNames, toggleShown }) => {
       const setVehiclesResponse = await Promise.all(
         value.vehicles.map((value) => fetch(value).then((res) => res.json()))
       );
-     
-      if(setVehiclesResponse >= 0){
-        setVehicles(setVehiclesResponse);
 
+      if (setVehiclesResponse >= 0) {
+        setVehicles(setVehiclesResponse);
       }
-      
     } catch {
       setHasError(true);
     } finally {
       setIsLoading(false);
     }
   };
-  console.log(starShip);
+
   console.log(vehicles);
   return (
     <div>
@@ -67,45 +64,16 @@ const InfoCard = ({ value, characterInfo, vehiclesNames, toggleShown }) => {
             <Card.Text className='mb-2 text-info '>
               {` Opening story : ${value.opening_crawl}`}
             </Card.Text>
-            <Container>
-              <Row>
+            
                 {characterInfo.map((value) => {
                   return (
                     <>
-                      <Col xs={6} md={4} lg={4}>
-                        <h6 className='m-2 text-danger'>{` Name: ${value.name}`}</h6>
-                        <Button
-                          key={value.name}
-                          className='m-1 text-dark'
-                          variant='outline-info'
-                          size='sm'
-                          onClick={() => {
-                            handleVehiclesFetch(value);
-                            toggleShown(value.name);
-                          }}
-                        >
-                          {' '}
-                          vehicles{' '}{vehicles.length > 0 && vehicles.map((vehicle)=> console.log(vehicle.name))}
-                        </Button>
-                       {/*  */}
-                        <Button
-                          variant='outline-success'
-                          className='m=1 text-dark'
-                          size='sm'
-                          onClick={() => {
-                            handleFetch(value);
-                            toggleShown(value.name);
-                          }}
-                        >
-                          {' '}
-                          starShip
-                        </Button>
-                      </Col>
+                      <CharInfo value={value} />
+                      
                     </>
                   );
                 })}
-              </Row>
-            </Container>
+            
           </Card.Body>
         </Card>
       </Col>
@@ -114,3 +82,4 @@ const InfoCard = ({ value, characterInfo, vehiclesNames, toggleShown }) => {
 };
 
 export default InfoCard;
+
