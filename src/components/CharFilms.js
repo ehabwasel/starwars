@@ -6,28 +6,24 @@ const CharInfo = ({ value }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [badRequest, setBadRequest] = useState(false);
-  const [starShip, setStarShip] = useState([]);
-  const [vehicles, setVehicles] = useState([]);
+  const [films, setFilms] = useState([]);
+  
 
   const handleFetch = async (value) => {
     try {
       setIsLoading(true);
 
-      const starShipResponse = await Promise.all(
-        value.starships.map((value) => fetch(value).then((res) => res.json()))
-      );
+     
       const setVehiclesResponse = await Promise.all(
-        value.vehicles.map((value) => fetch(value).then((res) => res.json()))
+        value.films.map((value) => fetch(value).then((res) => res.json()))
       );
       console.log(setVehiclesResponse);
 
       if (setVehiclesResponse.length >= 0) {
-        setVehicles(setVehiclesResponse);
+        setFilms(setVehiclesResponse);
       }
 
-      if (starShipResponse.length >= 0) {
-        setStarShip(starShipResponse);
-      }
+     
     } catch {
       setHasError(true);
     } finally {
@@ -46,25 +42,15 @@ const CharInfo = ({ value }) => {
         {value &&
       <ListGroup className='list-group-flush mb-3'>
         <ListGroup.Item>{`Name : ${value.name}`}</ListGroup.Item>
+        
         <ListGroup.Item>
-          {' '}
-          Starships :
-          {starShip.length ? (
-            starShip.map((value) => (
-              <a className='m-2 text-danger'>{`${value.name}`}</a>
+          Films :
+          {films.length ? (
+            films.map((value) => (
+              <a className='m-2 text-danger'>{`${value.title}`}</a>
             ))
           ) : (
-            <a>No Starships </a>
-          )}
-        </ListGroup.Item>
-        <ListGroup.Item>
-          Vehicles :
-          {vehicles.length ? (
-            vehicles.map((value) => (
-              <a className='m-2 text-danger'>{`${value.name}`}</a>
-            ))
-          ) : (
-            <a>No vehicls </a>
+            <a>No films </a>
           )}
         </ListGroup.Item>
       </ListGroup>
