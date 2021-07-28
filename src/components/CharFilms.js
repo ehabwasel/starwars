@@ -1,29 +1,41 @@
-import React from 'react';
+import { useContext } from 'react';
 import { useState, useEffect } from 'react';
-import useFetch from './useFetch';
-import { Col, Card, Row, Container, Button, ListGroup } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
+import { ItemContext } from './ItemsContext';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Loader from "react-loader-spinner";
 const CharInfo = ({ value }) => {
+    
+    const [items, setItems] = useContext(ItemContext);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [badRequest, setBadRequest] = useState(false);
   const [films, setFilms] = useState([]);
-  
+  const handleFilm = (e)=>{
+      if(films.length >= 0 ){
 
+          const filmObj = e.target.innerHTML
+          const result =films.filter((value)=>  value.title === filmObj )
+          
+          setItems(result)
+          console.log((result))
+      }
+   
+}
+ 
   const handleFetch = async (value) => {
     try {
       setIsLoading(true);
 
-     
-      const setVehiclesResponse = await Promise.all(
+      const filmsResponse = await Promise.all(
         value.films.map((value) => fetch(value).then((res) => res.json()))
       );
-      console.log(setVehiclesResponse);
+    //   console.log(filmsResponse);
 
-      if (setVehiclesResponse.length >= 0) {
-        setFilms(setVehiclesResponse);
+      if (filmsResponse.length >= 0) {
+        setFilms(filmsResponse);
+       
       }
-
-     
     } catch {
       setHasError(true);
     } finally {
@@ -37,24 +49,29 @@ const CharInfo = ({ value }) => {
 
   return (
     <div>
-         
-        
-        {value &&
-      <ListGroup className='list-group-flush mb-3'>
-        <ListGroup.Item>{`Name : ${value.name}`}</ListGroup.Item>
-        
-        <ListGroup.Item>
-          Films :
-          {films.length ? (
-            films.map((value) => (
-              <a className='m-2 text-danger'>{`${value.title}`}</a>
-            ))
-          ) : (
-            <a>No films </a>
-          )}
-        </ListGroup.Item>
-      </ListGroup>
-}
+      {isLoading && !hasError && <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />}
+        {badRequest && !hasError && <p className='loading'>Bad Request</p>}
+        {hasError && !isLoading && (
+          <p className='error text-alert'>Something Went Wrong!</p>
+        )}
+      {value && (
+        <ListGroup className='list-group-flush mb-3'>
+          <ListGroup.Item>{`Name : ${value.name}`}</ListGroup.Item>
+
+          <ListGroup.Item>
+            Films :
+            {films.length ? (
+              films.map((value,index) => (
+                
+                 <Link to ='/films'><p  onClick= {handleFilm}>{value.title}</p></Link> 
+              
+              ))
+            ) : (
+              <a>No films </a>
+            )}
+          </ListGroup.Item>
+        </ListGroup>
+      )}
     </div>
   );
 };

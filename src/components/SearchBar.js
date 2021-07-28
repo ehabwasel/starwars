@@ -1,79 +1,67 @@
-import React, { useState } from "react";
-import "./SearchBar.css";
-import SearchIcon from "@material-ui/icons/Search";
-import CloseIcon from "@material-ui/icons/Close";
-import useFetch from './useFetch'
-import { Row, Col, Button, Container } from 'react-bootstrap';
-import CharFilms from "./CharFilms";
+import React, { useState } from 'react';
+import './SearchBar.css';
+import SearchIcon from '@material-ui/icons/Search';
+import CloseIcon from '@material-ui/icons/Close';
+import useFetch from './useFetch';
+import CharFilms from './CharFilms';
+import Loader from 'react-loader-spinner';
 
 function SearchBar({ placeholder }) {
   const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState("");
+  const [wordEntered, setWordEntered] = useState('');
   const url = 'https://swapi.dev/api/people/?format=json';
-  const {
-    isLoading,
-    badRequest,
-    hasError,
-    data
-    
-  } = useFetch(url);
+  const { isLoading, badRequest, hasError, data ,setIsLoading} = useFetch(url);
 
   const handleFilter = (event) => {
+     setIsLoading(true)
     const searchWord = event.target.value;
+    console.log(searchWord);
+
     setWordEntered(searchWord);
+
     const newFilter = data.filter((value) => {
       return value.name.toLowerCase().includes(searchWord.toLowerCase());
     });
 
-    if (searchWord === "") {
+    if (searchWord === '') {
       setFilteredData([]);
     } else {
-      setFilteredData(newFilter);
+      if (searchWord.length >= 3) {
+        
+        setFilteredData(newFilter);
+        setIsLoading(false)
+      }
     }
+    console.log(searchWord);
   };
 
   const clearInput = () => {
     setFilteredData([]);
-    setWordEntered("");
+    setWordEntered('');
   };
 
-console.log(data )
-
   return (
-    <div className="search">
-      <div className="searchInputs">
+    <div className='search'>
+      <div className='searchInputs'>
         <input
-          type="text"
+          type='text'
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
-          onClick={()=>{ 
-            setFilteredData(data)
-         }}
-          
         />
-        <div className="searchIcon">
+        <div className='searchIcon'>
           {filteredData.length === 0 ? (
             <SearchIcon />
           ) : (
-            <CloseIcon id="clearBtn" onClick={clearInput} />
+            <CloseIcon id='clearBtn' onClick={clearInput} />
           )}
         </div>
       </div>
-      {isLoading && !hasError && <p className='loading'>Loading....</p>}
-        {badRequest && !hasError && <p className='loading'>Bad Request</p>}
-        {hasError && !isLoading && (
-          <p className='error text-alert'>Something Went Wrong!</p>
-        )}
+  
       {filteredData.length != 0 && (
-        <div className="dataResult">
-          {filteredData.slice(0,10).map((value, key) => {
-            return (
-
-              
-               <CharFilms value={value}/>
-             
-            );
+        <div className='dataResult'>
+          {filteredData.slice(0, 10).map((value, key) => {
+            return <CharFilms value={value} />;
           })}
         </div>
       )}

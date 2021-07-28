@@ -30,7 +30,7 @@ const useFetch = (url) => {
   
   };
 
-  const fetchApiArrayData = async (value) => {
+  const fetchApiArrayData = async (value,) => {
     try {
       setIsLoading(true);
       const response = await Promise.all(
@@ -53,7 +53,7 @@ const useFetch = (url) => {
   }, [url]);
 
 
-  return { isLoading, badRequest, hasError, data ,fetchApiArrayData,apiArrayData};
+  return { isLoading, badRequest, hasError, data ,fetchApiArrayData,apiArrayData,setIsLoading};
 };
 
 

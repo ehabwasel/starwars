@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import useFetch from './useFetch';
-import { Col, Card, Row, Container, Button, ListGroup } from 'react-bootstrap';
+import {  ListGroup } from 'react-bootstrap';
 const CharInfo = ({ value }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
