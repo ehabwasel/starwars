@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import useFetch from './useFetch';
+import fetch from './Fetch'
 import { Row, Col, Button, Container } from 'react-bootstrap';
 import InfoCard from './InfoCard';
 import Loader from "react-loader-spinner";
@@ -26,9 +27,10 @@ const Home = () => {
     badRequest,
     hasError,
     data,
-    fetchApiArrayData,apiArrayData
+    
     
   } = useFetch(url);
+  const {apiArrayData,fetchApiArrayData} = fetch ()
 
 
   
@@ -53,7 +55,7 @@ const Home = () => {
                   <Button
                     onClick={() => {
                       toggleShown(value.title);
-                      fetchApiArrayData(value);
+                      fetchApiArrayData(value,'characters');
                     }}
                   >
                     {' '}

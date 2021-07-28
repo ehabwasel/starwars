@@ -30,11 +30,11 @@ const useFetch = (url) => {
   
   };
 
-  const fetchApiArrayData = async (value,) => {
+  const fetchApiArrayData = async (value,property) => {
     try {
       setIsLoading(true);
       const response = await Promise.all(
-        value.characters.map((value) => fetch(value).then((res) => res.json()))
+        value[property].map((value) => fetch(value).then((res) => res.json()))
         
       );
       if(response.length >= 0){

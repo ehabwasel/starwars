@@ -1,12 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import {  ListGroup } from 'react-bootstrap';
+import Loader from "react-loader-spinner";
 const CharInfo = ({ value }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [badRequest, setBadRequest] = useState(false);
   const [starShip, setStarShip] = useState([]);
   const [vehicles, setVehicles] = useState([]);
+  
 
   const handleFetch = async (value) => {
     try {
@@ -41,7 +43,12 @@ const CharInfo = ({ value }) => {
   return (
     <div>
          
-        
+         {isLoading && !hasError && <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />}
+        {badRequest && !hasError && <p className='loading'>Bad Request</p>}
+        {hasError && !isLoading && (
+          <p className='error text-alert'>Something Went Wrong!</p>
+        )}
+
         {value &&
       <ListGroup className='list-group-flush mb-3'>
         <ListGroup.Item>{`Name : ${value.name}`}</ListGroup.Item>
