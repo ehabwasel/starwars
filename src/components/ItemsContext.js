@@ -3,12 +3,12 @@ import useFetch from './useFetch';
 export const ItemContext = createContext();
 
 export const ItemProvider = (props) => {
-  const [items, setItems] = useState(
+  const [filmInfo, setIFilmInfo] = useState(
    
   );
  
   return (
-    <ItemContext.Provider value={[items, setItems]}>
+    <ItemContext.Provider value={[filmInfo, setIFilmInfo]}>
       {props.children}
     </ItemContext.Provider>
   );

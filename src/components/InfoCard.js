@@ -1,7 +1,7 @@
 
 import React from 'react';
 import CharInfo from './CharInfo'
-import { Col, Card, Row, Container, Button } from 'react-bootstrap';
+import { Col, Card, Row, } from 'react-bootstrap';
 
 const InfoCard = ({ value, apiArrayData}) => {
   

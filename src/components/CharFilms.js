@@ -1,25 +1,25 @@
 import { useContext } from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { ItemContext } from './ItemsContext';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import fetch from './Fetch';
 
 const CharInfo = ({ value }) => {
-  const [items, setItems] = useContext(ItemContext);
+  const [filmInfo, setIFilmInfo]= useContext(ItemContext);
 
+  const { isLoading, badRequest, hasError, apiArrayData, fetchApiArrayData } =
+    fetch();
 
-  const { isLoading, badRequest, hasError,apiArrayData,setIsLoading,fetchApiArrayData}= fetch();
   const handleFilm = (e) => {
     if (apiArrayData.length >= 0) {
       const filmObj = e.target.innerHTML;
       const result = apiArrayData.filter((value) =>
-        value ? value.title === filmObj : <p>No Films</p>
+        value ? value.title === filmObj : <p>Loading ....</p>
       );
 
-      setItems(result);
-      console.log(result);
+      setIFilmInfo(result);
     }
   };
 

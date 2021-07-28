@@ -10,29 +10,25 @@ function SearchBar({ placeholder }) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState('');
   const url = 'https://swapi.dev/api/people/?format=json';
-  const { isLoading, badRequest, hasError, data ,setIsLoading} = useFetch(url);
+  const { isLoading, badRequest, hasError, data, setIsLoading } = useFetch(url);
 
   const handleFilter = (event) => {
-     setIsLoading(true)
+    setIsLoading(true);
     const searchWord = event.target.value;
-    console.log(searchWord);
-
+if(searchWord.length <=3){
+  setFilteredData([]);
+  setIsLoading(false)
+}
     setWordEntered(searchWord);
 
     const newFilter = data.filter((value) => {
       return value.name.toLowerCase().includes(searchWord.toLowerCase());
     });
 
-    if (searchWord === '') {
-      setFilteredData([]);
-    } else {
-      if (searchWord.length >= 3) {
-        
-        setFilteredData(newFilter);
-        setIsLoading(false)
-      }
+    if (searchWord.length >= 3) {
+      setFilteredData(newFilter);
+      setIsLoading(false);
     }
-    console.log(searchWord);
   };
 
   const clearInput = () => {
@@ -57,8 +53,15 @@ function SearchBar({ placeholder }) {
           )}
         </div>
       </div>
-  
-      {filteredData.length != 0 && (
+      {isLoading && !hasError && (
+        <Loader type='ThreeDots' color='#00BFFF' height={80} width={80} />
+      )}
+      {badRequest && !hasError && <p className='loading'>Bad Request</p>}
+      {hasError && !isLoading && (
+        <p className='error text-alert'>Something Went Wrong!</p>
+      )}
+
+      {filteredData.length !== 0 && (
         <div className='dataResult'>
           {filteredData.slice(0, 10).map((value, key) => {
             return <CharFilms value={value} />;
