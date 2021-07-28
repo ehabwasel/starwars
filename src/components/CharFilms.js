@@ -15,7 +15,7 @@ const CharInfo = ({ value }) => {
       if(films.length >= 0 ){
 
           const filmObj = e.target.innerHTML
-          const result =films.filter((value)=>  value.title === filmObj )
+          const result =films.filter((value)=> value ?  value.title === filmObj : <p>No Films</p>)
           
           setItems(result)
           console.log((result))
