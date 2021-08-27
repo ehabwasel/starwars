@@ -1,15 +1,21 @@
 # Find the demo of App Here
 ### https://star-wars-hyf.netlify.app/
 Step1: Films list
+ **web app that uses the Star wars API (SWAPI) to display list of films about the StarWars universe Fetching data for films when page loaded 
 <img width="972" alt="Screen Shot 2021-08-27 at 11 11 41 AM" src="https://user-images.githubusercontent.com/72751605/131103849-610099bf-7551-4cd1-805c-6ef2fdff4f2a.png">
 
 
-web app that uses the Star wars API (SWAPI) to display list of films about the StarWars universe
- Step 2
+
+ **Step 2 When clicking on the tittle bar the description is expanded and you see the rest of the data.fetching chainable data for each filem • the name of the character,
+• the spieces names that he belongs to and
+• the planet name he came from
+• the vehicle names he used on the film
+• the starship names he used on the film
+
  <img width="716" alt="Screen Shot 2021-08-27 at 11 17 22 AM" src="https://user-images.githubusercontent.com/72751605/131104234-587e07ac-9c30-4cb9-bc54-e584786895bc.png">
 
- When clicking on the tittle bar the description is expanded and you see the rest of the data.
- Step 3: People search page
+ .
+ **Step 3: People search page enter character name into search box and see filtered list of characters. No list displayed until <= 3 characters in search bar.Clicking on a link will allow user to see information on that film (new page)
  <img width="983" alt="Screen Shot 2021-08-27 at 11 12 17 AM" src="https://user-images.githubusercontent.com/72751605/131103886-8ca8ac1a-32ff-42a4-9104-6e8ca6159c76.png">
 
  using Chainable of fetching data 
