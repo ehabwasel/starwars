@@ -1,5 +1,12 @@
 # Find the demo of App Here
 ### https://star-wars-hyf.netlify.app/
+Step1: Films list
+
+web app that uses the Star wars API (SWAPI) to display list of films about the StarWars universe
+ Step 2
+ When clicking on the tittle bar the description is expanded and you see the rest of the data.
+ Step 3: People search page
+ using Chainable of fetching data 
 
 # Getting Started with Create React App
 
