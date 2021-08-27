@@ -1,11 +1,16 @@
 # Find the demo of App Here
-### https://star-wars-hyf.netlify.app/![Uploading Screen Shot 2021-08-27 at 11.11.41 AM.png…]()<img width="983" alt="Screen Shot 2021-08-27 at 11 12 17 AM" src="https://user-images.githubusercontent.com/72751605/131103723-01650652-52d2-4e4f-8b63-3662beb49af1.png">
+### https://star-wars-hyf.netlify.app/
 Step1: Films list
+<img width="972" alt="Screen Shot 2021-08-27 at 11 11 41 AM" src="https://user-images.githubusercontent.com/72751605/131103849-610099bf-7551-4cd1-805c-6ef2fdff4f2a.png">
+
 
 web app that uses the Star wars API (SWAPI) to display list of films about the StarWars universe
  Step 2
+ 
  When clicking on the tittle bar the description is expanded and you see the rest of the data.
  Step 3: People search page
+ <img width="983" alt="Screen Shot 2021-08-27 at 11 12 17 AM" src="https://user-images.githubusercontent.com/72751605/131103886-8ca8ac1a-32ff-42a4-9104-6e8ca6159c76.png">
+
  using Chainable of fetching data 
 
 # Getting Started with Create React App
