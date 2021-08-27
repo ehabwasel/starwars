@@ -6,7 +6,8 @@ Step1: Films list
 
 web app that uses the Star wars API (SWAPI) to display list of films about the StarWars universe
  Step 2
- 
+ <img width="716" alt="Screen Shot 2021-08-27 at 11 17 22 AM" src="https://user-images.githubusercontent.com/72751605/131104234-587e07ac-9c30-4cb9-bc54-e584786895bc.png">
+
  When clicking on the tittle bar the description is expanded and you see the rest of the data.
  Step 3: People search page
  <img width="983" alt="Screen Shot 2021-08-27 at 11 12 17 AM" src="https://user-images.githubusercontent.com/72751605/131103886-8ca8ac1a-32ff-42a4-9104-6e8ca6159c76.png">
