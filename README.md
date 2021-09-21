@@ -1,5 +1,5 @@
 # Find the demo of App Here
-### https://star-wars-hyf.netlify.app/
+### https://star-war-hyf.netlify.app
 Step1: Films list
  **web app that uses the Star wars API (SWAPI) to display list of films about the StarWars universe Fetching data for films when page loaded 
 <img width="972" alt="Screen Shot 2021-08-27 at 11 11 41 AM" src="https://user-images.githubusercontent.com/72751605/131103849-610099bf-7551-4cd1-805c-6ef2fdff4f2a.png">
