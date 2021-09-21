@@ -8,7 +8,7 @@ function App() {
   return (
     <Router>
       <Container>
-        <h1>Web Coding Challenge Star wars Films</h1>
+        <h2 className='title'>Web Coding Challenge Star wars Films</h2>
         <Switch>
           <ItemProvider>
             <Route exact path='/'>

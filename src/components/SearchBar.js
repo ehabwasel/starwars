@@ -63,7 +63,7 @@ if(searchWord.length <=3){
 
       {filteredData.length !== 0 && (
         <div className='dataResult'>
-          {filteredData.slice(0, 10).map((value, key) => {
+          {filteredData.map((value, key) => {
             return <CharFilms value={value} />;
           })}
         </div>

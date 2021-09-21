@@ -40,7 +40,7 @@ const Home = () => {
             return (
               <>
                 <Col lg='4' md='6' sm='6'>
-                  <h3 className='mb-4 text-dark'>{value.title}</h3>
+                  <h3 className='mb-4 text-light'>{value.title}</h3>
                 </Col>
                 <Col lg='2' md='4' sm='4'>
                   <Button
@@ -55,11 +55,7 @@ const Home = () => {
                 </Col>
 
                 {info.includes(value.title) && apiArrayData.length >= 0 && (
-                  <InfoCard
-                    value={value}
-                    apiArrayData={apiArrayData}
-                    toggleShown={toggleShown}
-                  />
+                  <InfoCard value={value} apiArrayData={apiArrayData} />
                 )}
               </>
             );

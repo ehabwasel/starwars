@@ -22,10 +22,12 @@ const CharInfo = ({ value }) => {
 
       if (setVehiclesResponse.length >= 0) {
         setVehicles(setVehiclesResponse);
+        setIsLoading(false);
       }
 
       if (starShipResponse.length >= 0) {
         setStarShip(starShipResponse);
+        setIsLoading(false);
       }
     } catch {
       setHasError(true);
@@ -69,7 +71,7 @@ const CharInfo = ({ value }) => {
                 <a className='m-2 text-danger'>{`${value.name}`}</a>
               ))
             ) : (
-              <a>No vehicls </a>
+              <a>No Vehicles </a>
             )}
           </ListGroup.Item>
         </ListGroup>

@@ -5,9 +5,37 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://cdn.onebauer.media/one/media/5ddc/ffc7/0a4e/c494/e8f7/62f2/star-wars-rise-skywalker-kylo-rey.jpg?format=jpg&quality=80&width=850&ratio=16-9&resize=aspectfill');
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  /* height: 100vh; */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.title {
+  margin: 15px auto;
+  text-align: center;
+  color: white;
+}
+
+.filmName  {
+ 
+  text-decoration: none;
+  color: rgb(19, 124, 216);
+ 
+ 
+}
+.filmName p {
+  padding: 10px;
+  
+ 
+}
+.dataResult{
+width: 100px;
 }

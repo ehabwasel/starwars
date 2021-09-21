@@ -7,7 +7,6 @@ const useFetch = (url) => {
   const [badRequest, setBadRequest] = useState(false);
   const [data, setData] = useState();
   
-  const [apiArrayData, setApiArrayData] = useState([]);
   
 
   const fetchData = async () => {
@@ -29,30 +28,13 @@ const useFetch = (url) => {
   
   };
 
-  const fetchApiArrayData = async (value,property) => {
-    try {
-      setIsLoading(true);
-      const response = await Promise.all(
-        value[property].map((value) => fetch(value).then((res) => res.json()))
-        
-      );
-      if(response.length >= 0){
-
-        setApiArrayData(response);
-      }
-      
-    } catch {
-      setHasError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  
   useEffect(() => {
     fetchData();
   }, [url]);
 
 
-  return { isLoading, badRequest, hasError, data ,fetchApiArrayData,apiArrayData,setIsLoading};
+  return { isLoading, badRequest, hasError, data ,setIsLoading};
 };
 
 

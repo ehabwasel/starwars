@@ -12,9 +12,10 @@ const CharInfo = ({ value }) => {
   const { isLoading, badRequest, hasError, apiArrayData, fetchApiArrayData } =
     fetch();
 
-  const handleFilm = (e) => {
+  const handleFilm = (title) => {
     if (apiArrayData.length >= 0) {
-      const filmObj = e.target.innerHTML;
+      const filmObj =title
+     
       const result = apiArrayData.filter((value) =>
         value ? value.title === filmObj : <p>Loading ....</p>
       );
@@ -44,12 +45,12 @@ const CharInfo = ({ value }) => {
             Films :
             {apiArrayData.length ? (
               apiArrayData.map((value, index) => (
-                <Link to='/films'>
-                  <p onClick={handleFilm}>{value.title}</p>
+                <Link to='/films' className='filmName'>
+                  <p onClick={() => handleFilm(value.title)}>{value.title}</p>
                 </Link>
               ))
             ) : (
-              <a>No films </a>
+              <p>Loading ... </p>
             )}
           </ListGroup.Item>
         </ListGroup>
